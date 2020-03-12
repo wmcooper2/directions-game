@@ -12,17 +12,24 @@ const InstructionsList = props => {
   );
   return <div className="instruction-list">{instructions}</div>;
 };
-// const Buttons = props => {};
+
+const ControlButton = props => {
+  return (
+    <div className={props.name} onClick={() => props.handleClick()}>
+      {props.name}
+    </div>
+  );
+};
 
 const ControlPanel = props => {
-  const { difficulty, instructions } = props;
+  const { difficulty, instructions, clickReset, clickTimer } = props;
   return (
     <div className="controlpanel">
       <InstructionsList instructions={instructions} />
       {difficulty === "easy" ? <EasyDpad /> : <HardDpad />}
       <div className="buttons">
-        <div className="timer">Timer</div>
-        <div className="resest">Reset</div>
+        <ControlButton name="Timer" handleClick={clickTimer} />
+        <ControlButton name="Reset" handleClick={clickReset} />
       </div>
     </div>
   );

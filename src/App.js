@@ -1,10 +1,9 @@
 import React from "react";
 import City from "./components/city";
 import ControlPanel from "./components/controlpanel";
+import PlayButton from "./components/playbutton";
 import Cardinal from "./components/cardinals";
 import "./App.css";
-
-// console.log("window:", window.screen.width);
 
 const EASY = "easy";
 // const HARD = "hard";
@@ -27,27 +26,81 @@ class App extends React.Component {
       cityW: 0,
       cityH: 0,
       cityX: 0,
-      cityY: 0
+      cityY: 0,
+      intersections: [],
+      parkingSpots: [],
+      gameInPlay: false
     };
+    this.calculateGrid = this.calculateGrid.bind(this);
+    this.clickPlay = this.clickPlay.bind(this);
+    this.clickReset = this.clickReset.bind(this);
+    this.clickTimer = this.clickTimer.bind(this);
   }
 
   componentDidMount() {
-    const city = document.getElementById("city");
-    console.log("city width: ", city.clientWidth);
-    console.log("city height: ", city.clientHeight);
-    console.log("city left: ", city.offsetLeft);
+    if (this.state.gameInPlay) {
+      const city = document.getElementById("city");
+      this.setState(() => {
+        return {
+          cityW: city.clientWidth,
+          cityH: city.clientHeight,
+          cityX: city.offsetLeft,
+          cityY: city.offsetTop
+        };
+      });
+    }
+
+    // for debug
+    // setTimeout(() => {
+    // this.calculateGrid();
+    // }, 2000);
+
+    // setTimeout(() => {
+    // console.log(this.state);
+    // }, 4000);
+  }
+
+  calculateGrid = () => {
+    let intersections = [];
+    let parkingSpots = [];
+    const { cityX, cityY, cityW, cityH, citySize } = this.state;
+    const blocksX = citySize[0];
+    const blocksY = citySize[1];
+    const stepX = cityW / blocksX;
+    const stepY = cityH / blocksY;
+    // console.log("cityX: ", cityX, "cityY: ", cityY);
+    // console.log("cityW: ", cityW, "cityH: ", cityH);
+    // console.log("blocksX: ", blocksX, "blocksY: ", blocksY);
+    // console.log("stepX: ", stepX, "stepY: ", stepY);
+    // populate the grid with intersections
+    for (let y = cityY; y <= cityH + stepY; y += stepY) {
+      for (let x = cityX; x <= cityW + stepX; x += stepX) {
+        intersections.push([x, y]);
+      }
+    }
+    // console.log("intersections: ", intersections);
     this.setState(() => {
       return {
-        cityW: city.clientWidth,
-        cityH: city.clientHeight,
-        cityX: city.offsetLeft,
-        cityY: city.offsetTop
+        intersections: intersections
       };
     });
-    setTimeout(() => {
-      console.log(this.state);
-    }, 2000);
-  }
+  };
+
+  clickPlay = props => {
+    this.setState(() => {
+      return {
+        gameInPlay: true
+      };
+    });
+  };
+
+  clickReset = props => {
+    console.log("clicked Reset");
+  };
+
+  clickTimer = props => {
+    console.log("clicked Timer");
+  };
 
   render() {
     return (
@@ -56,12 +109,16 @@ class App extends React.Component {
           <Cardinal direction="north" initial="N" />
           <div className="gameboard-center">
             <Cardinal direction="west" initial="W" />
-            <City />
+            {this.state.gameInPlay ? (
+              <City />
+            ) : (
+              <PlayButton handleClick={this.clickPlay} />
+            )}
             <Cardinal direction="east" initial="E" />
           </div>
           <Cardinal direction="south" initial="S" />
         </div>
-        <ControlPanel {...this.state} />
+        <ControlPanel {...this.state} clickReset={this.clickReset} clickTimer={this.clickTimer}/>
       </div>
     );
   }
