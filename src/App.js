@@ -72,21 +72,33 @@ class App extends React.Component {
     // console.log("cityW: ", cityW, "cityH: ", cityH);
     // console.log("blocksX: ", blocksX, "blocksY: ", blocksY);
     // console.log("stepX: ", stepX, "stepY: ", stepY);
-    // populate the grid with intersections
+
+    //intersections
     for (let y = cityY; y <= cityH + stepY; y += stepY) {
       for (let x = cityX; x <= cityW + stepX; x += stepX) {
         intersections.push([x, y]);
       }
     }
+
+    //parkingSpots
+    for (let y = cityY + stepY / 2; y < cityH; y += stepY) {
+      for (let x = cityX + stepX / 2; x < cityW; x += stepX) {
+        parkingSpots.push([x, y]);
+      }
+    }
+
     // console.log("intersections: ", intersections);
     this.setState(() => {
       return {
-        intersections: intersections
+        intersections: intersections,
+        parkingSpots: parkingSpots
       };
     });
   };
 
-  clickPlay = props => {
+  clickPlay = () => {
+    console.log(this.state);
+    this.calculateGrid();
     this.setState(() => {
       return {
         gameInPlay: true
@@ -118,7 +130,11 @@ class App extends React.Component {
           </div>
           <Cardinal direction="south" initial="S" />
         </div>
-        <ControlPanel {...this.state} clickReset={this.clickReset} clickTimer={this.clickTimer}/>
+        <ControlPanel
+          {...this.state}
+          clickReset={this.clickReset}
+          clickTimer={this.clickTimer}
+        />
       </div>
     );
   }
