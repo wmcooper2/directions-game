@@ -21,7 +21,7 @@ class App extends React.Component {
         "turn left",
         "go straight",
         "turn right",
-        "turn left"
+        "turn left",
       ],
       cityW: 0,
       cityH: 0,
@@ -29,7 +29,7 @@ class App extends React.Component {
       cityY: 0,
       intersections: [],
       parkingSpots: [],
-      gameInPlay: false
+      gameInPlay: false,
     };
     this.calculateGrid = this.calculateGrid.bind(this);
     this.clickPlay = this.clickPlay.bind(this);
@@ -45,7 +45,7 @@ class App extends React.Component {
           cityW: city.clientWidth,
           cityH: city.clientHeight,
           cityX: city.offsetLeft,
-          cityY: city.offsetTop
+          cityY: city.offsetTop,
         };
       });
     }
@@ -91,26 +91,27 @@ class App extends React.Component {
     this.setState(() => {
       return {
         intersections: intersections,
-        parkingSpots: parkingSpots
+        parkingSpots: parkingSpots,
       };
     });
   };
 
   clickPlay = () => {
-    console.log(this.state);
+    // console.log(this.state);
+    console.log("clicked Play");
     this.calculateGrid();
     this.setState(() => {
       return {
-        gameInPlay: true
+        gameInPlay: true,
       };
     });
   };
 
-  clickReset = props => {
+  clickReset = (props) => {
     console.log("clicked Reset");
   };
 
-  clickTimer = props => {
+  clickTimer = (props) => {
     console.log("clicked Timer");
   };
 
