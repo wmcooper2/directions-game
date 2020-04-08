@@ -1,0 +1,47 @@
+.dpad-signs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    "ul um ur"
+    "ml mm mr"
+    "bl bm br";
+  height: 30%;
+  border: var(--black-border);
+}
+
+.dpad-sign {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.dpad-words {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 30%;
+  border: var(--black-border);
+}
+
+#up {
+  grid-area: um;
+}
+
+#right {
+  grid-area: mr;
+}
+
+#down {
+  grid-area: bm;
+}
+
+#left {
+  grid-area: ml;
+}
+
+#center {
+  grid-area: mm;
+}

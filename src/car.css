@@ -1,0 +1,15 @@
+.pointup {
+  transform: rotate(0deg);
+}
+
+.pointdown {
+  transform: rotate(180deg);
+}
+
+.pointright {
+  transform: rotate(90deg);
+}
+
+.pointleft {
+  transform: rotate(-90deg);
+}

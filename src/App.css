@@ -1,3 +1,8 @@
+@import "city.css";
+@import "controlpanel.css";
+@import "dpad.css";
+@import "car.css";
+
 :root {
   --black-border: 1px solid black;
   --blue-border: 1px solid blue;
@@ -16,15 +21,6 @@
   display: flex;
   flex-direction: row;
   height: 90vh;
-}
-
-.gameboard {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 80vw;
-  border: var(--red-border);
 }
 
 /*NSEW*/
@@ -48,17 +44,6 @@
   width: 100%;
 }
 
-.gameboard-center {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-  border: var(--green-border);
-  width: 100%;
-  height: 100%;
-}
-
 #playbtn {
   font-size: 3rem;
   transition-duration: 300ms;
@@ -70,102 +55,4 @@
 #playbtn:hover {
   transform: scale(1.3);
   transition-duration: 300ms;
-}
-
-.city {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-areas:
-    "aa ab ac ad"
-    "ba bb bc bd"
-    "ca cb cc cd"
-    "da db dc dd";
-  border: var(--black-border);
-}
-
-.controlpanel {
-  display: flex;
-  flex-direction: column;
-  width: 20vw;
-  border: var(--blue-border);
-}
-
-.instruction-list {
-  display: flex;
-  flex-direction: column;
-  height: 60%;
-  border: var(--black-border);
-}
-
-.instruction {
-  padding-left: 10%;
-}
-
-.dpad-signs {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-areas:
-    "ul um ur"
-    "ml mm mr"
-    "bl bm br";
-  height: 30%;
-  border: var(--black-border);
-}
-
-.dpad-sign {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.dpad-words {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 30%;
-  border: var(--black-border);
-}
-
-.dpad-word {
-}
-
-#up {
-  grid-area: um;
-}
-
-#right {
-  grid-area: mr;
-}
-
-#down {
-  grid-area: bm;
-}
-
-#left {
-  grid-area: ml;
-}
-
-#center {
-  grid-area: mm;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 10%;
-  border: var(--black-border);
-}
-
-#timer,
-#reset {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 }

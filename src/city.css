@@ -1,0 +1,47 @@
+.gameboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+  border: var(--red-border);
+}
+
+.gameboard-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  border: var(--green-border);
+  width: 100%;
+  height: 100%;
+}
+
+.city {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-areas:
+    "aa ab ac ad"
+    "ba bb bc bd"
+    "ca cb cc cd"
+    "da db dc dd";
+  border: var(--black-border);
+}
+
+.intersection {
+  position: absolute;
+  background-color: red;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.parking-spot {
+  position: absolute;
+  background-color: green;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
