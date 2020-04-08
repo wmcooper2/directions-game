@@ -112,28 +112,44 @@ class ControlPanel extends React.Component {
   }
 
   startAnimation = (props) => {
-    // console.log("startAnimation: ", this.state.playersInstructions);
+    // console.log("startAnimation: ", this.state);
+
+    //sets timeouts based on index to move the car at the right times
+    let timeIndex = 0;
+    let direction = this.state.current;
     if (this.state.playersInstructions !== null) {
       for (let instruction of this.state.playersInstructions) {
         switch (instruction) {
           case "up":
-            this.moveCarUp();
+            if (!this.state.topBoundary.includes(this.state.current)) {
+              direction -= 5;
+              this.moveCarUp(timeIndex, direction);
+            }
             break;
-
           case "down":
-            this.moveCarDown();
+            if (!this.state.bottomBoundary.includes(this.state.current)) {
+              direction += 5;
+              this.moveCarDown(timeIndex, direction);
+            }
             break;
 
           case "left":
-            this.moveCarLeft();
+            if (!this.state.leftBoundary.includes(this.state.current)) {
+              direction -= 1;
+              this.moveCarLeft(timeIndex, direction);
+            }
             break;
 
           case "right":
-            this.moveCarRight();
+            if (!this.state.rightBoundary.includes(this.state.current)) {
+              direction += 1;
+              this.moveCarRight(timeIndex, direction);
+            }
             break;
           default:
           //nothing
         }
+        timeIndex++;
       }
       //  make sure the car is not going out of bounds
       //  rotate the car
@@ -162,60 +178,141 @@ class ControlPanel extends React.Component {
     });
   };
 
-  moveCarLeft = () => {
-    console.log("Left");
-    //if car in leftmost column, cant go left
-    let car = {};
-    car.orientation = this.state.orientation;
-    car.x = this.state.xPos;
-    car.y = this.state.yPos;
-    this.setState(() => {
-      return {
-        car: car,
-      };
-    });
+  moveCarLeft = (timeCoefficient, direction) => {
+    console.log("Left: ", timeCoefficient, direction);
+    console.log(this.state);
+    // let newCar = null;
+    // let newlocation = null;
+
+    // if (!this.state.leftBoundary.includes(this.state.current)) {
+    // console.log("Minus 1, left");
+    // newlocation = this.state.current - 1;
+    // newCar = {
+    // orientation: "pointup",
+    // x: this.state.intersectionCoordinates[newlocation][0],
+    // y: this.state.intersectionCoordinates[newlocation][1],
+    // };
+    // } else {
+    // newlocation = this.state.current;
+    const newCar = {
+      orientation: "pointup",
+      x: this.state.intersectionCoordinates[direction][0],
+      y: this.state.intersectionCoordinates[direction][1],
+    };
+    // }
+
+    // State updates as a result of the timeout
+    setTimeout(() => {
+      this.setState(() => {
+        return {
+          car: newCar,
+          current: direction,
+        };
+      });
+    }, timeCoefficient * 1000);
   };
 
-  moveCarRight = () => {
-    console.log("Right");
-    //if car in rightmost column, cant go right
-    let car = {};
-    car.orientation = this.state.orientation;
-    car.x = this.state.xPos;
-    car.y = this.state.yPos;
-    this.setState(() => {
-      return {
-        car: car,
-      };
-    });
+  moveCarRight = (timeCoefficient, direction) => {
+    console.log("Right: ", timeCoefficient, direction);
+    console.log(this.state);
+    // let newCar = null;
+    // let newlocation = null;
+
+    // if (!this.state.rightBoundary.includes(this.state.current)) {
+    // console.log("Add 1, right");
+    // newlocation = this.state.current + 1;
+    // newCar = {
+    // orientation: "pointup",
+    // x: this.state.intersectionCoordinates[newlocation][0],
+    // y: this.state.intersectionCoordinates[newlocation][1],
+    // };
+    // } else {
+    // newlocation = this.state.current;
+    const newCar = {
+      orientation: "pointup",
+      x: this.state.intersectionCoordinates[direction][0],
+      y: this.state.intersectionCoordinates[direction][1],
+    };
+    // }
+
+    // State updates as a result of the timeout
+    setTimeout(() => {
+      this.setState(() => {
+        return {
+          car: newCar,
+          current: direction,
+        };
+      });
+    }, timeCoefficient * 1000);
   };
 
-  moveCarUp = () => {
-    console.log("Up");
-    //if car in topmost row, cant go up
-    let car = {};
-    car.orientation = this.state.orientation;
-    car.x = this.state.xPos;
-    car.y = this.state.yPos;
-    this.setState(() => {
-      return {
-        car: car,
-      };
-    });
+  moveCarUp = (timeCoefficient, direction) => {
+    console.log("Up: ", timeCoefficient, direction);
+    console.log(this.state);
+    // let newCar = null;
+    // let newlocation = null;
+
+    // if (!this.state.topBoundary.includes(this.state.current)) {
+    // console.log("Minus 5, up");
+    // newlocation = this.state.current - 5;
+    // newCar = {
+    // orientation: "pointup",
+    // x: this.state.intersectionCoordinates[newlocation][0],
+    // y: this.state.intersectionCoordinates[newlocation][1],
+    // };
+    // } else {
+    // newlocation = this.state.current;
+    const newCar = {
+      orientation: "pointup",
+      x: this.state.intersectionCoordinates[direction][0],
+      y: this.state.intersectionCoordinates[direction][1],
+      // };
+    };
+
+    // State updates as a result of the timeout
+    setTimeout(() => {
+      this.setState(() => {
+        return {
+          car: newCar,
+          current: direction,
+        };
+      });
+    }, timeCoefficient * 1000);
   };
 
-  moveCarDown = () => {
-    console.log("Down");
-    //if car in bottommost row, cant go down
-    let car = {};
-    car.orientation = this.state.orientation;
-    car.x = this.state.xPos;
-    car.y = this.state.yPos;
-    this.setState(() => {
-      return {
-        car: car,
-      };
-    });
+  moveCarDown = (timeCoefficient, direction) => {
+    console.log("Down: ", timeCoefficient, direction);
+    console.log(this.state);
+    // let newCar = null;
+    // let newlocation = null;
+
+    // if (!this.state.bottomBoundary.includes(this.state.current)) {
+    // add 5 to current
+    // console.log("Add 5, down");
+    // newlocation = this.state.current + 5;
+    // newCar = {
+    // orientation: "pointup",
+    // x: this.state.intersectionCoordinates[newlocation][0],
+    // y: this.state.intersectionCoordinates[newlocation][1],
+    // };
+    // } else {
+    // newlocation = this.state.current;
+    const newCar = {
+      orientation: "pointup",
+      x: this.state.intersectionCoordinates[direction][0],
+      y: this.state.intersectionCoordinates[direction][1],
+    };
+    // }
+
+    // State updates as a result of the timeout
+    setTimeout(() => {
+      this.setState(() => {
+        return {
+          car: newCar,
+          current: direction,
+        };
+      });
+    }, timeCoefficient * 1000);
   };
 
   clearInstructions = () => {
