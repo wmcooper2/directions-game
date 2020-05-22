@@ -112,9 +112,6 @@ class ControlPanel extends React.Component {
   }
 
   startAnimation = (props) => {
-    // console.log("startAnimation: ", this.state);
-
-    //sets timeouts based on index to move the car at the right times
     let timeIndex = 0;
     let direction = this.state.current;
     if (this.state.playersInstructions !== null) {
@@ -129,6 +126,7 @@ class ControlPanel extends React.Component {
           case "down":
             if (!this.state.bottomBoundary.includes(this.state.current)) {
               direction += 5;
+              console.log("move down: ",this.state);
               this.moveCarDown(timeIndex, direction);
             }
             break;
@@ -143,6 +141,7 @@ class ControlPanel extends React.Component {
           case "right":
             if (!this.state.rightBoundary.includes(this.state.current)) {
               direction += 1;
+              console.log("move right: ",this.state);
               this.moveCarRight(timeIndex, direction);
             }
             break;
@@ -151,14 +150,6 @@ class ControlPanel extends React.Component {
         }
         timeIndex++;
       }
-      //  make sure the car is not going out of bounds
-      //  rotate the car
-      //  get the coordinate pair of the next place the car will go to (from this.state.intersectionCoordinates)
-      //  update the state of the car
-      //  wait for the animation to finish
-      //  load the next instruction
-
-      //when all of the instructions are finished...
     }
   };
 
@@ -179,27 +170,11 @@ class ControlPanel extends React.Component {
   };
 
   moveCarLeft = (timeCoefficient, direction) => {
-    console.log("Left: ", timeCoefficient, direction);
-    console.log(this.state);
-    // let newCar = null;
-    // let newlocation = null;
-
-    // if (!this.state.leftBoundary.includes(this.state.current)) {
-    // console.log("Minus 1, left");
-    // newlocation = this.state.current - 1;
-    // newCar = {
-    // orientation: "pointup",
-    // x: this.state.intersectionCoordinates[newlocation][0],
-    // y: this.state.intersectionCoordinates[newlocation][1],
-    // };
-    // } else {
-    // newlocation = this.state.current;
     const newCar = {
       orientation: "pointup",
       x: this.state.intersectionCoordinates[direction][0],
       y: this.state.intersectionCoordinates[direction][1],
     };
-    // }
 
     // State updates as a result of the timeout
     setTimeout(() => {
@@ -213,27 +188,11 @@ class ControlPanel extends React.Component {
   };
 
   moveCarRight = (timeCoefficient, direction) => {
-    console.log("Right: ", timeCoefficient, direction);
-    console.log(this.state);
-    // let newCar = null;
-    // let newlocation = null;
-
-    // if (!this.state.rightBoundary.includes(this.state.current)) {
-    // console.log("Add 1, right");
-    // newlocation = this.state.current + 1;
-    // newCar = {
-    // orientation: "pointup",
-    // x: this.state.intersectionCoordinates[newlocation][0],
-    // y: this.state.intersectionCoordinates[newlocation][1],
-    // };
-    // } else {
-    // newlocation = this.state.current;
     const newCar = {
       orientation: "pointup",
       x: this.state.intersectionCoordinates[direction][0],
       y: this.state.intersectionCoordinates[direction][1],
     };
-    // }
 
     // State updates as a result of the timeout
     setTimeout(() => {
@@ -247,26 +206,10 @@ class ControlPanel extends React.Component {
   };
 
   moveCarUp = (timeCoefficient, direction) => {
-    console.log("Up: ", timeCoefficient, direction);
-    console.log(this.state);
-    // let newCar = null;
-    // let newlocation = null;
-
-    // if (!this.state.topBoundary.includes(this.state.current)) {
-    // console.log("Minus 5, up");
-    // newlocation = this.state.current - 5;
-    // newCar = {
-    // orientation: "pointup",
-    // x: this.state.intersectionCoordinates[newlocation][0],
-    // y: this.state.intersectionCoordinates[newlocation][1],
-    // };
-    // } else {
-    // newlocation = this.state.current;
     const newCar = {
       orientation: "pointup",
       x: this.state.intersectionCoordinates[direction][0],
       y: this.state.intersectionCoordinates[direction][1],
-      // };
     };
 
     // State updates as a result of the timeout
@@ -281,28 +224,11 @@ class ControlPanel extends React.Component {
   };
 
   moveCarDown = (timeCoefficient, direction) => {
-    console.log("Down: ", timeCoefficient, direction);
-    console.log(this.state);
-    // let newCar = null;
-    // let newlocation = null;
-
-    // if (!this.state.bottomBoundary.includes(this.state.current)) {
-    // add 5 to current
-    // console.log("Add 5, down");
-    // newlocation = this.state.current + 5;
-    // newCar = {
-    // orientation: "pointup",
-    // x: this.state.intersectionCoordinates[newlocation][0],
-    // y: this.state.intersectionCoordinates[newlocation][1],
-    // };
-    // } else {
-    // newlocation = this.state.current;
     const newCar = {
       orientation: "pointup",
       x: this.state.intersectionCoordinates[direction][0],
       y: this.state.intersectionCoordinates[direction][1],
     };
-    // }
 
     // State updates as a result of the timeout
     setTimeout(() => {
